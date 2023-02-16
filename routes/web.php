@@ -21,6 +21,13 @@ use App\Http\Controllers\TestController;
 |
 */
 
+
+
+
+Route::group(['/prefix'=>'admin'],function (){
+    Route::get('/','App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
+});
+
 Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
 
     $awesome_service->doAwesomeThing();
@@ -31,7 +38,7 @@ Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
     // dd('hello World');
     // return view('auth.login');
 });
-Route::get('/', function () {
+Route::get('/welcome', function () {
 
     return view('welcome');
 });
