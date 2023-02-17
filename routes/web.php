@@ -26,6 +26,7 @@ use App\Http\Controllers\TestController;
 
 Route::group(['/prefix'=>'admin'],function (){
     Route::get('/','App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
+    Route::resource('roles', 'App\Http\Controllers\Backend\RolesController');
 });
 
 Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
@@ -74,7 +75,7 @@ Route::any('/mailsend', 'App\Http\Controllers\MailController@send');
 
 Route::get('/pdf', 'App\Http\Controllers\PdfController@pdf');
 
-Auth::routes();
+//Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -93,6 +94,6 @@ Route::get('strip/payment', function () {
 Route::post('payment-process', [StripeController::class, 'process']);
 
 Route::get('/test', [TestController::class,'show']);
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
