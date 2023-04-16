@@ -97,3 +97,9 @@ Route::get('/test', [TestController::class,'show']);
 //Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\ExcelCSVController;
+
+Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
+Route::post('import-excel-csv-file', [ExcelCSVController::class, 'importExcelCSV']);
+Route::get('export-excel-csv-file/{slug}', [ExcelCSVController::class, 'exportExcelCSV']);
