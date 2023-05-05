@@ -32,38 +32,64 @@ class RolePermissionSeeder extends Seeder
 
         //creates permission
         $permissions = [
-            //Dashboard
-            //'dashboard.view',
-            //post permission
-            'post.create',
-            'post.read',
-            'post.update',
-            'post.delete',
-            'post.approve',
-            //post permission
-            'admin.create',
-            'admin.read',
-            'admin.update',
-            'admin.delete',
-            'admin.approve',
-            //editor permission
-            'user.create',
-            'user.read',
-            'user.update',
-            'user.delete',
-            'user.approve',
-            //editor permission
-            'editor.create',
-            'editor.read',
-            'editor.update',
-            'editor.delete',
-            'editor.approve',
+            [
+                'group_name'=>'dashboard',
+                'permissions'=>[
+                    'dashboard.view',
+                    'dashboard.edit',
+                    ]
+            ],
+            [
+                'group_name'=>'post',
+                'permissions'=>[
+                    'post.create',
+                    'post.read',
+                    'post.update',
+                    'post.delete',
+                    'post.approve',
+                ]
+            ],
+            [
+                'group_name'=>'admin',
+                'permissions'=>[
+                    'admin.create',
+                    'admin.read',
+                    'admin.update',
+                    'admin.delete',
+                    'admin.approve',
+                ]
+            ],
+            [
+                'group_name'=>'user',
+                'permissions'=>[
+                    'user.create',
+                    'user.read',
+                    'user.update',
+                    'user.delete',
+                    'user.approve',
+                ]
+            ],
+            [
+                'group_name'=>'editor',
+                'permissions'=>[
+                    'editor.create',
+                    'editor.read',
+                    'editor.update',
+                    'editor.delete',
+                    'editor.approve',
+                ]
+            ],
+
         ];
         $super_admin = Role::where('name','super_admin')->first();
         for($i=0;$i<count($permissions);$i++){
-            $permission = Permission::create(['name'=>$permissions[$i]]);
-            $super_admin->givePermissionTo($permission);
-            $permission->assignRole($super_admin);
+            $group_name = $permissions[$i]['group_name'];
+            for ($j=0;$j<count($permissions[$i]['permissions']);$j++){
+                $permission = Permission::create(['name'=>$permissions[$i]['permissions'][$j],'group_name'=>$group_name]);
+                $super_admin->givePermissionTo($permission);
+                $permission->assignRole($super_admin);
+            }
+
         }
     }
 }
