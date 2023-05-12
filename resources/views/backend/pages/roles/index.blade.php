@@ -44,23 +44,26 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Data Table Default</h4>
-                        <div class="data-tables">
+                        <div class="">
                             <table id="dataTable" class="text-center">
                                 <thead class="bg-light text-capitalize">
                                 <tr>
-                                    <th>SN</th>
+{{--                                    <th>SN</th>--}}
                                     <th>Position</th>
-                                    <th>Gurd</th>
-                                    <th>Created At</th>
+{{--                                    <th>Gurd</th>--}}
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($roles as $role)
                                     <tr>
-                                        <td>{{$loop->index+1}}</td>
+{{--                                        <td>{{$loop->index+1}}</td>--}}
                                         <td>{{$role->name}}</td>
-                                        <td>{{$role->guard_name}}</td>
-                                        <td>{{$role->created_at}}</td>
+{{--                                        <td>{{$role->guard_name}}</td>--}}
+                                        <td>
+                                            <a class="btn btn-danger" href="">Delete</a>
+                                            <a class="btn btn-warning" href="{{ url('/roles/'.$role->id . '/edit')}}">Edit</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

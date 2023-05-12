@@ -49,4 +49,23 @@ class User extends Authenticatable
     {
         return $this->HasMany(Post::class);
     }
+    public static function roleHasPermissions($role,$permissions,$group_name){
+        if($group_name=="all"){
+        foreach ($permissions as $permission){
+             if(!$role->hasPermissionTo($permission->name)){
+                return false;
+            }
+        }
+        }
+        else{
+            foreach ($permissions as $permission){
+                if($permission->group_name==$group_name) {
+                    if (!$role->hasPermissionTo($permission->name)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }

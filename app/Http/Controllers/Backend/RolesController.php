@@ -72,7 +72,10 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $permissions = Permission::all();
+        $group_name = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+        return view('backend.pages.roles.edit',compact('role','permissions','group_name'));
     }
 
     /**
