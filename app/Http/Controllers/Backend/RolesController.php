@@ -87,7 +87,23 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd("called");
+        // Validation Data
+        $request->validate([
+            'name' => 'required|max:100|unique:roles,name,' . $id
+        ], [
+            'name.requried' => 'Please give a role name'
+        ]);
+
+        $role = Role::findById($id);
+        $permissions = $request->input('permissions');
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        session()->flash('success', 'Role has been updated !!');
+        return back();
     }
 
     /**

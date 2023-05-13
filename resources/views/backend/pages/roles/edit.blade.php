@@ -11,7 +11,9 @@
               <div class="card">
                   <div class="card-body">
                       <h4 class="header-title">Edit Role</h4>
-                      <form action="{{url('roles')}}" method="post">
+                      @include('backend.layouts.partials.message')
+                      <form action="{{url('roles/'.$role->id)}}" method="post">
+                          @method('PUT')
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <div class="form-group">
                               <label for="exampleInputName">Role Name</label>
