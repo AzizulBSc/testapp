@@ -61,7 +61,7 @@ class UsersController extends Controller
         }
 
         session()->flash('success', 'User has been created !!');
-        return redirect()->route('admin/users/index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -72,7 +72,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -83,6 +83,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+
         $user = User::find($id);
         $roles  = Role::all();
         return view('backend.pages.users.edit', compact('user', 'roles'));

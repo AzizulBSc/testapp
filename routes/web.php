@@ -25,7 +25,7 @@ use App\Http\Controllers\TestController;
 Route::group(['/prefix'=>'admin'],function (){
     Route::get('/','App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'App\Http\Controllers\Backend\RolesController');
-    Route::resource('users','App\Http\Controllers\Backend\UsersController');
+    Route::resource('users','App\Http\Controllers\Backend\UsersController', ['names' => 'users']);
 });
 
 
@@ -60,9 +60,9 @@ Route::get('lang/{lang}', [HomeController::class, 'switchLang'])->name('lang.swi
 //     });
 
 
-Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('auth/google', 'App\Http\Controllers\Auth\LoginController@redirectToGoogle');
 
-Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('auth/google/callback', 'App\Http\Controllers\Auth\LoginController@handleGoogleCallback');
 
 //Route::get('/send', 'App\Http\Controllers\MailController@index');
 Route::get('/mail', 'App\Http\Controllers\MailController@index1');

@@ -45,6 +45,8 @@
                     <div class="card-body">
                         <h4 class="header-title">Data Table Default</h4>
                         <div class="data-tables datatable-dark">
+
+                            @include('backend.layouts.partials.message')
                             <table id="" class="text-center table-striped">
                                 <thead class="bg-dark text-capitalize">
                                 <tr>
@@ -67,8 +69,13 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger" href="">Delete</a>
-                                            <a class="btn btn-warning" href="{{ url('/users/'.$user->id . '/edit')}}">Edit</a>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+
+                                            <a class="btn btn-warning" href="{{ route('users.edit',$user->id)}}">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach
