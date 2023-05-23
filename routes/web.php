@@ -28,10 +28,17 @@ Route::group(['/prefix'=>'admin'],function (){
     Route::resource('users','App\Http\Controllers\Backend\UsersController', ['names' => 'users']);
 });
 
+//auth routes
+Route::get('/admin/login','App\Http\Controllers\Backend\Auth\LoginController@showLoginForm')->name('admin.login');
 
+Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
 
+// Logout Routes
+Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
 
-
+// Forget Password Routes
+Route::get('/password/reset', 'Backend\Auth\ForgetPasswordController@showLinkRequestForm')->name('admin.password.request');
+Route::post('/password/reset/submit', 'Backend\Auth\ForgetPasswordController@reset')->name('admin.password.reset');
 
 Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
     $awesome_service->doAwesomeThing();
@@ -72,7 +79,7 @@ Route::any('/mailsend', 'App\Http\Controllers\MailController@send');
 
 Route::get('/pdf', 'App\Http\Controllers\PdfController@pdf');
 
-Auth::routes();
+//Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -91,7 +98,7 @@ Route::get('strip/payment', function () {
 Route::post('payment-process', [StripeController::class, 'process']);
 
 Route::get('/test', [TestController::class,'show']);
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -43,7 +43,17 @@ return [
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
-            
+
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'admin_api' => [
+            'driver' => 'passport',
+            'provider' => 'admin',
+            'hash'=>false,
+
         ],
     ],
 
@@ -68,6 +78,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
@@ -98,6 +112,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admin' => [
+            'provider' => 'admin',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -110,8 +130,8 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
-     
-    
+
+
 
     'password_timeout' => 10800,
 
