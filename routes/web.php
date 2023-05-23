@@ -22,25 +22,25 @@ use App\Http\Controllers\TestController;
 */
 
 
-
-
 Route::group(['/prefix'=>'admin'],function (){
     Route::get('/','App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'App\Http\Controllers\Backend\RolesController');
+    Route::resource('users','App\Http\Controllers\Backend\UsersController');
 });
 
-Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
 
+
+
+
+
+Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
     $awesome_service->doAwesomeThing();
     // return new Response();
-
-
     // dd($this->app());
     // dd('hello World');
     // return view('auth.login');
 });
 Route::get('/welcome', function () {
-
     return view('welcome');
 });
 Route::get('/redirect', 'App\Http\Controllers\SocialiteController@redirect');
@@ -64,9 +64,6 @@ Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
 
 Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
-
-
-
 //Route::get('/send', 'App\Http\Controllers\MailController@index');
 Route::get('/mail', 'App\Http\Controllers\MailController@index1');
 
@@ -75,7 +72,7 @@ Route::any('/mailsend', 'App\Http\Controllers\MailController@send');
 
 Route::get('/pdf', 'App\Http\Controllers\PdfController@pdf');
 
-//Auth::routes();
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

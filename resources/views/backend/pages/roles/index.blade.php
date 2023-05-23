@@ -44,22 +44,22 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Data Table Default</h4>
-                        <div class="">
-                            <table id="dataTable" class="text-center">
-                                <thead class="bg-light text-capitalize">
+                        <div class="data-tables datatable-dark">
+                            <table id="" class="text-center table-striped">
+                                <thead class="bg-dark text-capitalize">
                                 <tr>
-{{--                                    <th>SN</th>--}}
-                                    <th>Position</th>
-{{--                                    <th>Gurd</th>--}}
-                                    <th>Action</th>
+                                    <th width="5%">Sl</th>
+                                    <th width="10%">Name</th>
+{{--                                    <th width="60%">Permissions</th>--}}
+                                    <th width="15%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($roles as $role)
                                     <tr>
-{{--                                        <td>{{$loop->index+1}}</td>--}}
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$role->name}}</td>
-{{--                                        <td>{{$role->guard_name}}</td>--}}
+{{--                                        <td><span class="badge badge-pill badge-primary">Primary</span></td>--}}
                                         <td>
                                             <a class="btn btn-danger" href="">Delete</a>
                                             <a class="btn btn-warning" href="{{ url('/roles/'.$role->id . '/edit')}}">Edit</a>
