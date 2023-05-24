@@ -40,10 +40,12 @@
                             @enderror
                         </div>
                         <div class="form-gp">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password" autofocus>
                             <i class="ti-lock"></i>
-                            <div class="text-danger"></div>
+                             @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                             @enderror
                         </div>
                         <div class="row mb-4 rmber-area">
                             <div class="col-6">
@@ -53,25 +55,27 @@
                                 </div>
                             </div>
                             <div class="col-6 text-right">
-                                <a href="#">Forgot Password?</a>
+                             @if (Route::has('password.request'))
+                                <a href="{{ route('admin.password.reset') }}">Forgot Password?</a>
+                                @endif
                             </div>
                         </div>
                         <div class="submit-btn-area">
                             <button id="form_submit" type="submit"> {{ __('Login') }}<i class="ti-arrow-right"></i></button>
                             <div class="login-other row mt-4">
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <a class="fb-login" href="#">Log in with <i class="fa fa-facebook"></i></a>
-                                </div>
+                                   </div> --}}
                                 <div class="col-6">
-                                    @if (Route::has('password.request'))
-                                    <a class="google-login" href="{{ route('admin.password.reset') }}">{{ __('Forgot Your Password?') }} <i class="fa fa-google"></i></a>
-                                    @endif
+                                    {{-- @if (Route::has('password.request'))
+                                    <a class="google-login" href="{{ route('admin.password.reset') }}">{{ __('Forgot Your Password?') }}</a>
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-footer text-center mt-5">
+                        {{-- <div class="form-footer text-center mt-5">
                             <p class="text-muted">Don't have an account? <a href="register.html">Sign up</a></p>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>

@@ -38,8 +38,30 @@ class LoginController extends Controller
 //        $this->middleware('guest')->except('logout');
 //    }
 
+
     function showLoginForm()
     {
         return view('backend.auth.login');
+    }
+
+    function login(Request $req){
+        $req->validate([
+            'email'=>'required|max:50',
+            'password' =>'required'
+        ]);
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
+            session->flash('succes','Successfully Loged In');
+            return redirect()->route('admin.dashboard');
+        }
+        else {
+            // Search using username
+            if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
+                session()->flash('success', 'Successully Logged in !');
+                return redirect()->route('admin.dashboard');
+            }
+            // error
+            session()->flash('error', 'Invalid email and password');
+            return back();
+        }
     }
 }
