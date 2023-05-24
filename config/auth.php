@@ -47,11 +47,11 @@ return [
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'users',
         ],
         'admin_api' => [
             'driver' => 'passport',
-            'provider' => 'admin',
+            'provider' => 'users',
             'hash'=>false,
 
         ],

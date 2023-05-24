@@ -24,13 +24,14 @@
     <div class="login-area">
         <div class="container">
             <div class="login-box ptb--100">
-                <form method="POST" action="{{ route('admin.login') }}">
+                <form action="{{ route('admin.login.submit') }}" method="POST">
                     @csrf
                     <div class="login-form-head">
                         <h4>Sign In</h4>
                         <p>Hello there, Sign in and start managing your Admin Template</p>
                     </div>
                     <div class="login-form-body">
+                        @include('backend.layouts.partials.message')
                         <div class="form-gp">
                             <label for="email">Email address</label>
                             <input type="email" id="email" class = "@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -81,7 +82,7 @@
             </div>
         </div>
     </div>
-  
+
 @include('backend.layouts.partials.js')
 @yield('page-js')
 </body>

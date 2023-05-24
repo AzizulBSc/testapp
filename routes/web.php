@@ -31,14 +31,14 @@ Route::group(['/prefix'=>'admin'],function (){
 //auth routes
 Route::get('/admin/login','App\Http\Controllers\Backend\Auth\LoginController@showLoginForm')->name('admin.login');
 
-Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
+Route::post('/login/submit', 'App\Http\Controllers\Backend\Auth\LoginController@login')->name('admin.login.submit');
 
 // Logout Routes
-Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
+Route::get('/logout', 'App\Http\Controllers\Backend\Auth\LoginController@logout')->name('admin.logout');
 
 // Forget Password Routes
-Route::get('/password/reset', 'Backend\Auth\ForgetPasswordController@showLinkRequestForm')->name('admin.password.request');
-Route::post('/password/reset/submit', 'Backend\Auth\ForgetPasswordController@reset')->name('admin.password.reset');
+Route::get('/password/reset', 'App\Http\Controllers\Backend\Auth\ForgetPasswordController@showLinkRequestForm')->name('admin.password.request');
+Route::post('/password/reset/submit', 'App\Http\Controllers\Backend\Auth\ForgetPasswordController@reset')->name('admin.password.reset');
 
 Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
     $awesome_service->doAwesomeThing();

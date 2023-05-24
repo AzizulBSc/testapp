@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     /*
@@ -44,18 +45,19 @@ class LoginController extends Controller
         return view('backend.auth.login');
     }
 
-    function login(Request $req){
-        $req->validate([
+    function login(Request $request){
+        $request->validate([
             'email'=>'required|max:50',
             'password' =>'required'
         ]);
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
-            session->flash('succes','Successfully Loged In');
-            return redirect()->route('admin.dashboard');
+
+        if(Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request->password], $request->remember)){
+            session()->flash('success','Successfully Logged In');
+            return redirect()->intended(route('admin.dashboard'));
         }
         else {
             // Search using username
-            if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
+            if (Auth::guard('admin')->attempt(['name' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successully Logged in !');
                 return redirect()->route('admin.dashboard');
             }
@@ -63,5 +65,10 @@ class LoginController extends Controller
             session()->flash('error', 'Invalid email and password');
             return back();
         }
+    }
+    function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
     }
 }
