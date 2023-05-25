@@ -35,7 +35,11 @@
                                         <td>{{$role->name}}</td>
 {{--                                        <td><span class="badge badge-pill badge-primary">Primary</span></td>--}}
                                         <td>
-                                            <a class="btn btn-danger" href="">Delete</a>
+                                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                             <a class="btn btn-warning" href="{{ url('/roles/'.$role->id . '/edit')}}">Edit</a>
                                         </td>
                                     </tr>

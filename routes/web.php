@@ -24,7 +24,7 @@ use App\Http\Controllers\TestController;
 
 Route::group(['/prefix'=>'admin'],function (){
     Route::get('/','App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
-    Route::resource('roles', 'App\Http\Controllers\Backend\RolesController');
+    Route::resource('roles', 'App\Http\Controllers\Backend\RolesController', ['names' => 'roles']);
     Route::resource('users','App\Http\Controllers\Backend\UsersController', ['names' => 'users']);
 });
 

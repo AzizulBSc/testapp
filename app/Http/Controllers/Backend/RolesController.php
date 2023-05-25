@@ -45,7 +45,7 @@ class RolesController extends Controller
         $request->validate(
             ['name'=>'required|max:100|unique:roles'],['name.required'=>'Please Give a Role name']
         );
-        $role =  Role::create(['name' => $request->name]);
+        $role =  Role::create(['name' => $request->name,'guard_name'=>'admin']);
         if(!empty($request->permissions)){
             $role->syncPermissions($request->permissions);
         }
@@ -114,6 +114,12 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Role::find($id);
+        if (!is_null($user)) {
+            $user->delete();
+        }
+
+        session()->flash('success', 'Role has been deleted !!');
+        return back();
     }
 }

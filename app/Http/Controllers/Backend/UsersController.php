@@ -9,16 +9,31 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use Auth;
 class UsersController extends Controller
 {
+
+    public $user;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::guard('admin')->user();
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+        // dd( Auth::guard('admin')->user());
+        if (is_null($this->user) || !$this->user->can('admin.read')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any admin !');
+        }
         $users = User::all();
         return view('backend.pages.users.index', compact('users'));
     }
@@ -48,7 +63,7 @@ class UsersController extends Controller
             'email' => 'required|max:100|email|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
-
+    //   dd($request->all());
         // Create New User
         $user = new User();
         $user->name = $request->name;
