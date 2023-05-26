@@ -32,7 +32,7 @@ class UsersController extends Controller
     {
         // dd( Auth::guard('admin')->user());
         if (is_null($this->user) || !$this->user->can('admin.read')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any admin !');
+            return view('errors.403');
         }
         $users = User::all();
         return view('backend.pages.users.index', compact('users'));

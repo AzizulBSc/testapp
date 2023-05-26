@@ -29,7 +29,9 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users"></i><span>Users
                                     </span></a>
                         <ul class="collapse">
+                            @can('admin.read')
                             <li><a href="{{url('/users') }}">All Users</a></li>
+                            @endcan
                             <li><a href="{{url('/users/create')}}">User Create</a></li>
                         </ul>
                     </li>
