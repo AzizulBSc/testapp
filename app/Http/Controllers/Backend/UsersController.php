@@ -29,7 +29,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
         // dd( Auth::guard('admin')->user());
         if (is_null($this->user) || !$this->user->can('admin.read')) {
             abort(403, 'Sorry !! You are Unauthorized to view any admin !');

@@ -6,7 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 class RolePermissionSeeder extends Seeder
 {
     /**
@@ -26,8 +27,9 @@ class RolePermissionSeeder extends Seeder
         ];
 
 
+        DB::table('roles')->truncate();
         for($i=0;$i<count($roles);$i++){
-            $result = Role::create(['name'=>$roles[$i]]);
+            $result = Role::updateOrCreate(['name'=>$roles[$i],'guard_name'=>'admin']);
         }
 
         //creates permission
@@ -81,15 +83,24 @@ class RolePermissionSeeder extends Seeder
             ],
 
         ];
+        DB::table('permissions')->truncate();
         $super_admin = Role::where('name','super_admin')->first();
         for($i=0;$i<count($permissions);$i++){
             $group_name = $permissions[$i]['group_name'];
             for ($j=0;$j<count($permissions[$i]['permissions']);$j++){
-                $permission = Permission::create(['name'=>$permissions[$i]['permissions'][$j],'group_name'=>$group_name,'guard_name'=>'admin']);
+                $permission = Permission::updateOrCreate(['name'=>$permissions[$i]['permissions'][$j],'group_name'=>$group_name,'guard_name'=>'admin']);
                 $super_admin->givePermissionTo($permission);
                 $permission->assignRole($super_admin);
             }
 
         }
+        DB::table('users')->truncate();
+        // $user = User::where('email','azizulh8774@gamil.com')->first();
+        // if(is_null($user)){
+        $user = new User();
+        $user->name = "Azizul Hoque";
+        $user->email = "azizulh8774@gamil.com";
+        $user->password = Hash::make("12345678");
+        $user->save();
     }
 }
