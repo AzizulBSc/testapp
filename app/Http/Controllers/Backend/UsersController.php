@@ -31,9 +31,9 @@ class UsersController extends Controller
     public function index()
     {
         // dd( Auth::guard('admin')->user());
-        if (is_null($this->user) || !$this->user->can('admin.read')) {
-            return view('errors.403');
-        }
+        // if (is_null($this->user) || !$this->user->can('admin.read')) {
+        //     return view('errors.403');
+        // }
         $users = User::all();
         return view('backend.pages.users.index', compact('users'));
     }
