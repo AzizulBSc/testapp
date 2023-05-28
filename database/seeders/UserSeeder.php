@@ -22,9 +22,9 @@ class UserSeeder extends Seeder
     {
             $user = new User();
             $user->name = "Azizul Hoque";
-            $user->email = "azizulh8774@gamil.com";
-            $user->password = Hash::make("12345678");
+            $user->email = "azizulh8774@gmail.com";
+            $user->password = Hash::make("123456");
             $user->save();
-            User::factory()->count(200)->create();
+            User::factory()->count(50)->create();
     }
 }
