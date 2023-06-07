@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Traits\ResponseTrait;
+use Exception;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
 
 class UserController extends Controller
 {
+    use ResponseTrait;
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -36,12 +39,15 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:6'
 
         ]);
         if ($validator->fails()) {
             return response()->json(['status' => 'fails', 'validation_error' => $validator->errors()]);
         }
+
+
+        
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
@@ -52,6 +58,13 @@ class UserController extends Controller
     }
     public function user_details()
     {
+        try{
+            return $this->responseSuccess(User::all(),"User Fetched Successfully");
+        }
+        catch(Exception $e){
+            return $this->responseError([],$e->getMessage(),$e->getCode());
+        }
+        // return response()->json(User::all());
         $user = Auth::user();
         if ($user) {
             return response()->json(['status' => 'success', 'user' => $user]);

@@ -2,11 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ResponseTrait;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class Authenticate extends Middleware
 {
+    use ResponseTrait;
+
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -15,15 +18,24 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if(Auth::guard('admin')){
-            if (! $request->expectsJson()) {
-                return route('admin.login');
-            }
-        }
-        else{
         if (! $request->expectsJson()) {
-            return route('login');
+            return $this->responseError(null, 'Unauthenticated access');
         }
     }
+
+    /**
+     * Handle an unauthenticated user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  array  $guards
+     * @return void
+     *
+     * @throws \Illuminate\Auth\AuthenticationException
+     */
+    protected function unauthenticated($request, array $guards)
+    {
+        throw new HttpResponseException(
+            $this->responseError(null, 'Unauthenticated access.')
+        );
     }
 }
