@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TestController;
-
+use App\Http\Controllers\ExcelCSVController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,7 +102,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-use App\Http\Controllers\ExcelCSVController;
 
 Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
 Route::post('import-excel-csv-file', [ExcelCSVController::class, 'importExcelCSV']);

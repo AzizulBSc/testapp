@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use App\Traits\ResponseTrait;
 use Exception;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +13,10 @@ use Laravel\Passport\HasApiTokens;
 
 class UserController extends Controller
 {
-    use ResponseTrait;
+    private function responseJson($status,$message,$data){
+        return response()->json([$status,$message,$data]);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -24,14 +26,14 @@ class UserController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json(['status' => 'fails', 'validation_error' => $validator->errors()]);
+                return $this->responseJson('failed',"Data Validation Error",$validator->errors());
         }
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         if ($user) {
-            return response()->json(['status' => 'success', 'message' => "User Registration Successfully Completed", 'data' => $user]);
-        } else return response()->json(['status' => 'failed', 'message' => "User Registration failed"]);
+            return $this->responseJson('success',"User Created Successfully",$user);
+        } else  return $this->responseJson('failed',"User Registration failed",[]);
     }
 
 
@@ -43,33 +45,36 @@ class UserController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json(['status' => 'fails', 'validation_error' => $validator->errors()]);
+            return $this->responseJson('failed',"Data Validation Error",$validator->errors());
+            
         }
-
-
         
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
-            return response()->json(['status' => 'success', 'login' => true, 'token' => $token, 'data' => $user]);
+            return $this->responseJson('success',"Login Successfully",$token);
         } else {
-            return response()->json(['status' => 'failed', 'message' => 'Login failed Data Not Valid ', 'login' => false,]);
+            return $this->responseJson('failed',"Data Not matched",$validator->errors());
         }
     }
+
     public function user_details()
     {
         try{
-            return $this->responseSuccess(User::all(),"User Fetched Successfully");
+            return response()->json([
+                'status' => true,
+                'message' => "User Fetched Successfully",
+                'data' => User::all(),
+                'errors' => null
+            ]);
         }
         catch(Exception $e){
-            return $this->responseError([],$e->getMessage(),$e->getCode());
-        }
-        // return response()->json(User::all());
-        $user = Auth::user();
-        if ($user) {
-            return response()->json(['status' => 'success', 'user' => $user]);
-        } else {
-            return response()->json(['status' => 'failed', 'message' => 'User Not Found']);
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => null,
+                'errors' => $e->getCode(),
+            ]);
         }
     }
 }

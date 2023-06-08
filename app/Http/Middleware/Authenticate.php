@@ -35,7 +35,7 @@ class Authenticate extends Middleware
     protected function unauthenticated($request, array $guards)
     {
         throw new HttpResponseException(
-            $this->responseError(null, 'Unauthenticated access.')
+            $this->responseError(null, 'Unauthenticated access')
         );
     }
 }
