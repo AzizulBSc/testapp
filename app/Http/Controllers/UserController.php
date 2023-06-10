@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Traits\ResponseTrait;
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth;
@@ -37,39 +38,22 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['status' => 'fails', 'validation_error' => $validator->errors()]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return $this->responseError([], 'No user Found');
         }
-
-
-        
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $token = $user->createToken('token')->plainTextToken;
-            return response()->json(['status' => 'success', 'login' => true, 'token' => $token, 'data' => $user]);
-        } else {
-            return response()->json(['status' => 'failed', 'message' => 'Login failed Data Not Valid ', 'login' => false,]);
+        if (Hash::check($request->password, $user->password)) {
+            $createdToken = $user->createToken('authToken')->accessToken;
+            $data = [
+                'user' => $user,
+                'access_token' => $createdToken,
+                'token_type' => 'Bearer',
+            ];
+            return $this->responseSuccess($data, "logged In successfully");
         }
     }
     public function user_details()
     {
-        try{
-            return $this->responseSuccess(User::all(),"User Fetched Successfully");
-        }
-        catch(Exception $e){
-            return $this->responseError([],$e->getMessage(),$e->getCode());
-        }
-        // return response()->json(User::all());
-        $user = Auth::user();
-        if ($user) {
-            return response()->json(['status' => 'success', 'user' => $user]);
-        } else {
-            return response()->json(['status' => 'failed', 'message' => 'User Not Found']);
-        }
+        return $this->responseSuccess(User::all(), "Users Data Fetch Successfully");
     }
 }

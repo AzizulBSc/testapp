@@ -43,7 +43,6 @@ return [
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
-
         ],
         'admin' => [
             'driver' => 'session',
@@ -52,7 +51,7 @@ return [
         'admin_api' => [
             'driver' => 'passport',
             'provider' => 'users',
-            'hash'=>false,
+            'hash' => false,
 
         ],
     ],
@@ -118,6 +117,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
     ],
 
     /*
