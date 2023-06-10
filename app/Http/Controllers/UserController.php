@@ -53,7 +53,7 @@ class UserController extends Controller
         }
     }
     public function user_details()
-    {
+    {   //finally it is well
         return $this->responseSuccess(User::all(), "Users Data Fetch Successfully");
     }
 }
