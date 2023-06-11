@@ -51,15 +51,23 @@ class UserController extends Controller
         
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $token = $user->createToken('token')->plainTextToken;
-            return $this->responseJson('success',"Login Successfully",$token);
+            $token = $user->createToken('token');
+            $data = [
+                'user'=>$user,
+                'access_token'=>$token,
+                'token_type'=>"Bearer",
+                'message'=>"Login Successfully",
+            ];
+            // return $this->responseJson('success',"Login Successfully",$token);
+            return response()->json($data);
         } else {
             return $this->responseJson('failed',"Data Not matched",$validator->errors());
         }
     }
 
     public function user_details()
-    {
+    { 
+        //update
         try{
             return response()->json([
                 'status' => true,
