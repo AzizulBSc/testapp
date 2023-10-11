@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ExcelCSVController;
+use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,7 @@ Route::group(['/prefix'=>'admin'],function (){
 });
 
 //auth routes
+// Auth::routes();
 Route::get('/admin/login','App\Http\Controllers\Backend\Auth\LoginController@showLoginForm')->name('admin.login');
 
 Route::post('/login/submit', 'App\Http\Controllers\Backend\Auth\LoginController@login')->name('admin.login.submit');
@@ -98,11 +100,12 @@ Route::get('strip/payment', function () {
 Route::post('payment-process', [StripeController::class, 'process']);
 
 Route::get('/test', [TestController::class,'show']);
+Route::get('/pdf', [PdfController::class, 'pdf']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
+Route::get('/excel/import', [ExcelCSVController::class, 'index'])->name('excel.import');
 Route::post('import-excel-csv-file', [ExcelCSVController::class, 'importExcelCSV']);
 Route::get('export-excel-csv-file/{slug}', [ExcelCSVController::class, 'exportExcelCSV']);

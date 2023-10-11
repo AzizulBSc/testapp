@@ -482,7 +482,8 @@
                                 <div class="hidden fixed  px-6 py-4 sm:block">
                                     <div class="language">
                                         <select name="" class="form-control top-selector language_switcher">
-                                            <option value="en">{{ Config::get('languages')[App::getLocale()] }}</option>
+                                            <option value="en">{{ Config::get('languages')[App::getLocale()] }}
+                                            </option>
                                             @foreach (Config::get('languages') as $lang => $language)
                                                 @if ($lang != App::getLocale())
                                                     <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>

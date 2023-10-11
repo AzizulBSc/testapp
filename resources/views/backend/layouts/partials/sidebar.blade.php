@@ -24,6 +24,16 @@
                             </span></a>
                     </li>
                     <li>
+                        <a href="{{ route('excel.import') }}" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Excel Import
+                            </span></a>
+                    </li>
+                    <li>
+                        <a href="{{ url('pdf') }}" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Pdf
+                            </span></a>
+                    </li>
+                    <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i
                                 class="ti-layout-sidebar-left"></i><span>Roles
                             </span></a>

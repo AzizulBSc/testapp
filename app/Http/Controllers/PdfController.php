@@ -12,7 +12,10 @@ class PdfController extends Controller
     {
 
         $data = [
-            'foo' => 'bar'
+           'name' => 'John Doe',
+           'address' => '123 Main St.',
+           'phone' => '123-456-7890',
+           'body' => 'This is the body of the PDF file.'
         ];
         $pdf = new PDF();
         $pdf->loadView('pdf.document', $data);

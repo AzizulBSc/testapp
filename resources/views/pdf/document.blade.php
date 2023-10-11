@@ -68,14 +68,17 @@
                 display: block;
                 float: none;
             }
+
             header: page-header;
-	        footer: page-footer;
+            footer: page-footer;
     </style>
 </head>
 
 <body>
-   <header><h3> Header</h3></header>
-    <table>
+    <header>
+        <h3> Header</h3>
+    </header>
+    <table class="table">
         <th>
             <tr>
                 <td>Name</td>
@@ -84,12 +87,19 @@
                 <td>Body</td>
             </tr>
         </th>
-        <tr>
+        <tbody>
+            <tr>
+                <td>{{$name}}</td>
+                <td>{{$phone}}</td>
+                <td>{{$address}}</td>
+                <td>{{$body}}</td>
+            </tr>
 
-
-        </tr>
+        </tbody>
     </table>
-    <footer><h3>footer</h3></footer>
+    <footer>
+        <h3>footer</h3>
+    </footer>
 </body>
 
 </html>

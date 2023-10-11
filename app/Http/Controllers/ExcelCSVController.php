@@ -18,7 +18,7 @@ class ExcelCSVController extends Controller
      */
     public function index()
     {
-        return view('excel-csv-import');
+        return view('excel-import');
     }
 
     /**
