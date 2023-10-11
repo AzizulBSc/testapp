@@ -187,6 +187,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -200,7 +201,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Telescope\TelescopeServiceProvider::class,
         App\Providers\PersonServiceProvider::class,
-        App\Providers\AwesomeServiceProvider::class, Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        App\Providers\AwesomeServiceProvider::class, 
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Livewire\LivewireServiceProvider::class,
 
 

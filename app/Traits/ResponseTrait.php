@@ -18,11 +18,11 @@ trait ResponseTrait
     public function responseSuccess($data, $message = "Successful"): JsonResponse
     {
         return response()->json([
-            'status' => true,
+            'status' => "success",
             'message' => $message,
             'data' => $data,
             'errors' => null
-        ], Response::HTTP_OK);
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -34,13 +34,13 @@ trait ResponseTrait
      *
      * @return JsonResponse
      */
-    public function responseError($errors, $message = "Something went wrong.", int $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
+    public function responseError($errors, $message = "Something went wrong."): JsonResponse
     {
         return response()->json([
-            'status' => false,
+            'status' => "failed",
             'message' => $message,
             'data' => null,
             'errors' => $errors
-        ], $responseCode);
+        ],Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

@@ -10,7 +10,9 @@ use Illuminate\Http\JsonResponse;
 class Authenticate extends Middleware
 {
     use ResponseTrait;
-
+    private function responseJson($status,$message,$data){
+        return response()->json([$status,$message,$data]);
+    }
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -21,6 +23,7 @@ class Authenticate extends Middleware
     {
         if (!$request->expectsJson()) {
             return $this->responseError(null, 'Unauthenticated access');
+            // return $this->responseJson('failed1',"Unauthenticated access",null);
         }
     }
 
@@ -36,7 +39,7 @@ class Authenticate extends Middleware
     protected function unauthenticated($request, array $guards): JsonResponse
     {
         throw new HttpResponseException(
-            $this->responseError(null, 'Unauthenticated access.')
+            $this->responseError(null, 'Unauthenticated access')
         );
     }
 }
