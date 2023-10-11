@@ -50,7 +50,7 @@ Route::get('/service', function (AwesomeServiceInterface $awesome_service) {
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/redirect', 'App\Http\Controllers\SocialiteController@redirect');
+Route::get('/google/login', 'App\Http\Controllers\SocialiteController@redirect')->name('google.login');
 Route::get('/callback', 'App\Http\Controllers\SocialiteController@callback');
 Route::get('/home', 'App\Http\Controllers\SocialiteController@home')->name('home');
 

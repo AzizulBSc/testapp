@@ -64,13 +64,15 @@
                         <div class="submit-btn-area">
                             <button id="form_submit" type="submit"> {{ __('Login') }}<i class="ti-arrow-right"></i></button>
                             <div class="login-other row mt-4">
-                                {{-- <div class="col-6">
-                                    <a class="fb-login" href="#">Log in with <i class="fa fa-facebook"></i></a>
-                                   </div> --}}
+                                <div class="col-6">
+                                    <a class="google-login" href="{{ route('google.login') }}">Log in with <i class="fa fa-facebook"></i></a>
+                                   </div>
                                 <div class="col-6">
                                     {{-- @if (Route::has('password.request'))
                                     <a class="google-login" href="{{ route('admin.password.reset') }}">{{ __('Forgot Your Password?') }}</a>
                                     @endif --}}
+                                    <a class="google-login" href="{{ url('welcome
+                                    ') }}">{{ __('Payment Method') }}</a>
                                 </div>
                             </div>
                         </div>

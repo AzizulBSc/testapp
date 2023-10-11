@@ -12,13 +12,13 @@ class StripeController extends Controller
      }
     public function process(Request $request)
     {
-  
+
         $stripe = Stripe::charges()->create([
             'source' => $request->get('tokenId'),
             'currency' => 'USD',
             'amount' => $request->get('amount') * 100
         ]);
-  
+
         return $stripe;
     }
 }

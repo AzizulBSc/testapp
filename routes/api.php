@@ -22,7 +22,4 @@ Route::middleware('auth:api')->group(function () {
     Route::get('user', [UserController::class, 'user_details']);
 });
 
-<<<<<<< HEAD
 // Route::get('user', [UserController::class, 'user_details']);
-=======
->>>>>>> 61b70c744a64c4f71d5f8eaffb4a02c9ca993b1b

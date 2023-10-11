@@ -9,17 +9,24 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-{{--                    <li class="active">--}}
-{{--                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>--}}
-{{--                        <ul class="collapse">--}}
-{{--                            <li class="active"><a href="index.html">ICO dashboard</a></li>--}}
-{{--                            <li><a href="index2.html">Ecommerce dashboard</a></li>--}}
-{{--                            <li><a href="index3.html">SEO dashboard</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    {{-- <li class="active">--}}
+                        {{-- <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-dashboard"></i><span>dashboard</span></a>--}}
+                        {{-- <ul class="collapse">--}}
+                            {{-- <li class="active"><a href="index.html">ICO dashboard</a></li>--}}
+                            {{-- <li><a href="index2.html">Ecommerce dashboard</a></li>--}}
+                            {{-- <li><a href="index3.html">SEO dashboard</a></li>--}}
+                            {{-- </ul>--}}
+                        {{-- </li>--}}
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Roles
-                                    </span></a>
+                        <a href="{{ url('welcome') }}" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Pront Page
+                            </span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Roles
+                            </span></a>
                         <ul class="collapse">
                             <li><a href="{{url('/roles')}}">All Roles</a></li>
                             <li><a href="{{url('/roles/create')}}">Role Create</a></li>
@@ -27,7 +34,7 @@
                     </li>
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users"></i><span>Users
-                                    </span></a>
+                            </span></a>
                         <ul class="collapse">
                             @can('admin.read')
                             <li><a href="{{url('/users') }}">All Users</a></li>
@@ -36,7 +43,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-pie-chart"></i><span>Charts</span></a>
                         <ul class="collapse">
                             <li><a href="barchart.html">bar chart</a></li>
                             <li><a href="linechart.html">line Chart</a></li>
@@ -44,7 +52,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>UI Features</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>UI
+                                Features</span></a>
                         <ul class="collapse">
                             <li><a href="accordion.html">Accordion</a></li>
                             <li><a href="alert.html">Alert</a></li>
@@ -84,7 +93,8 @@
                     <li><a href="maps.html"><i class="ti-map-alt"></i> <span>maps</span></a></li>
                     <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Invoice Summary</span></a></li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i> <span>Pages</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i>
+                            <span>Pages</span></a>
                         <ul class="collapse">
                             <li><a href="login.html">Login</a></li>
                             <li><a href="login2.html">Login 2</a></li>
@@ -110,7 +120,7 @@
                     </li>
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>Multi
-                                        level menu</span></a>
+                                level menu</span></a>
                         <ul class="collapse">
                             <li><a href="#">Item level (1)</a></li>
                             <li><a href="#">Item level (1)</a></li>

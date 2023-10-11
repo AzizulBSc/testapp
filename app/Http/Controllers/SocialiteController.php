@@ -41,9 +41,10 @@ class SocialiteController extends Controller
     }
     public function home()
     {
+        return redirect()->url('/admin');
         return view('home');
     }
     public function token(){
-        
+
     }
 }
