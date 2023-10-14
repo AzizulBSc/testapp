@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Person;
+use Illuminate\Support\ServiceProvider;
 
 class PersonServiceProvider extends ServiceProvider
 {

@@ -23,6 +23,6 @@ class AwesomeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind('App\Service\AwesomeServiceInterface','App\Service\AwesomeService');
+        $this->app->bind('App\Service\AwesomeServiceInterface', 'App\Service\AwesomeService');
     }
 }

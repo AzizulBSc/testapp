@@ -13,11 +13,10 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-
     protected $commands = [
         // other commands go here
 
-//        \App\Console\Commands\CreateCustomService::class,
+        //        \App\Console\Commands\CreateCustomService::class,
     ];
 
     protected function schedule(Schedule $schedule)

@@ -1,4 +1,6 @@
-<?php return [
+<?php
+
+return [
     'Documentation' => 'Documentation',
     'laravel_news' => 'Laravel News',
     'Laracasts' => 'Laracasts',

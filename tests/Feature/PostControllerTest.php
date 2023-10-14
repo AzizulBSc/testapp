@@ -2,18 +2,16 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\Post;
-use App\Models\User;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
     public function it_shows_list_of_post()
     {
-      $this->assertTrue(true);
+        $this->assertTrue(true);
     }
     // use RefreshDatabase;
 
@@ -31,5 +29,4 @@ class PostControllerTest extends TestCase
 
     // }
 
-    
 }

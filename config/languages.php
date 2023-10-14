@@ -1,5 +1,6 @@
 <?php
+
 return [
     'en' => 'English',
-    'bn' => 'Bangla'
+    'bn' => 'Bangla',
 ];

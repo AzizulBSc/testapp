@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
@@ -18,7 +18,8 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('backend.pages.roles.index',compact('roles'));
+
+        return view('backend.pages.roles.index', compact('roles'));
     }
 
     /**
@@ -31,26 +32,27 @@ class RolesController extends Controller
 
         $permissions = Permission::all();
         $group_name = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
-        return view('backend.pages.roles.create',compact('permissions','group_name'));
+
+        return view('backend.pages.roles.create', compact('permissions', 'group_name'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate(
-            ['name'=>'required|max:100|unique:roles'],['name.required'=>'Please Give a Role name']
+            ['name' => 'required|max:100|unique:roles'], ['name.required' => 'Please Give a Role name']
         );
-        $role =  Role::create(['name' => $request->name,'guard_name'=>'admin']);
-        if(!empty($request->permissions)){
+        $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
+        if (! empty($request->permissions)) {
             $role->syncPermissions($request->permissions);
         }
         $roles = Role::all();
-        return view('backend.pages.roles.index',compact('roles'));
+
+        return view('backend.pages.roles.index', compact('roles'));
     }
 
     /**
@@ -75,34 +77,35 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
         $group_name = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
-        return view('backend.pages.roles.edit',compact('role','permissions','group_name'));
+
+        return view('backend.pages.roles.edit', compact('role', 'permissions', 'group_name'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-//        dd("called");
+        //        dd("called");
         // Validation Data
         $request->validate([
-            'name' => 'required|max:100|unique:roles,name,' . $id
+            'name' => 'required|max:100|unique:roles,name,'.$id,
         ], [
-            'name.requried' => 'Please give a role name'
+            'name.requried' => 'Please give a role name',
         ]);
 
         $role = Role::findById($id);
         $permissions = $request->input('permissions');
 
-        if (!empty($permissions)) {
+        if (! empty($permissions)) {
             $role->syncPermissions($permissions);
         }
 
         session()->flash('success', 'Role has been updated !!');
+
         return back();
     }
 
@@ -115,11 +118,12 @@ class RolesController extends Controller
     public function destroy($id)
     {
         $user = Role::find($id);
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             $user->delete();
         }
 
         session()->flash('success', 'Role has been deleted !!');
+
         return back();
     }
 }

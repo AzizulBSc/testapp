@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Traits\ResponseTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
-use App\Traits\ResponseTrait;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -24,7 +22,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->responseError($validator->errors(), "Data Validation Error");
+            return $this->responseError($validator->errors(), 'Data Validation Error');
         }
 
         $data = $request->all();
@@ -46,12 +44,12 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->responseError($validator->errors(), "Data Validation Error");
+            return $this->responseError($validator->errors(), 'Data Validation Error');
         }
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return $this->responseError([], 'No user Found');
         }
 
@@ -62,9 +60,10 @@ class UserController extends Controller
                 'access_token' => $createdToken,
                 'token_type' => 'Bearer',
             ];
-            return $this->responseSuccess($data, "Logged In successfully");
+
+            return $this->responseSuccess($data, 'Logged In successfully');
         } else {
-            return $this->responseError([], "Password does not match");
+            return $this->responseError([], 'Password does not match');
         }
     }
 
@@ -72,7 +71,7 @@ class UserController extends Controller
     {
         // Update - you may want to apply pagination for large datasets
         try {
-            return $this->responseSuccess(User::all(), "Users Fetched Successfully");
+            return $this->responseSuccess(User::all(), 'Users Fetched Successfully');
         } catch (Exception $e) {
             return $this->responseError([], $e->getMessage());
         }

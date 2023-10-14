@@ -201,10 +201,9 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Telescope\TelescopeServiceProvider::class,
         App\Providers\PersonServiceProvider::class,
-        App\Providers\AwesomeServiceProvider::class, 
+        App\Providers\AwesomeServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Livewire\LivewireServiceProvider::class,
-
 
     ],
 

@@ -4,7 +4,7 @@ namespace App;
 
 class Student
 {
- private $name;
+    private $name;
 
     /**
      * @return mixed
@@ -15,12 +15,10 @@ class Student
     }
 
     /**
-     * @param mixed $name
+     * @param  mixed  $name
      */
     public function setName(): void
     {
-        $this->name = "Azizul";
+        $this->name = 'Azizul';
     }
-
 }
-

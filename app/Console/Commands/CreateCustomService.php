@@ -30,6 +30,6 @@ EOT;
 
         file_put_contents(app_path("Services/{$serviceName}.php"), $serviceClass);
 
-        $this->info("Custom service created successfully!");
+        $this->info('Custom service created successfully!');
     }
 }
