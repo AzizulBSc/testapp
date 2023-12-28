@@ -4,6 +4,7 @@ use App\Http\Controllers\ExcelCSVController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\Backend\Auth\ForgetPasswordController;
 use App\Http\Controllers\TestController;
 use App\Service\AwesomeServiceInterface;
 use Illuminate\Http\Response;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/chat','App\Http\Controllers\ChatController@index')->name('chat');
 Route::group(['/prefix' => 'admin'], function () {
     Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'App\Http\Controllers\Backend\RolesController', ['names' => 'roles']);
