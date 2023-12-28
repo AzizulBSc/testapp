@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Database\Eloquent\Factory;
-use Tests\TestCase;
 use App\Models\User;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -32,5 +29,4 @@ class UserTest extends TestCase
 
         $this->assertTrue(auth()->attempt(['email' => $user->email, 'password' => $user->password]));
     }
-
 }

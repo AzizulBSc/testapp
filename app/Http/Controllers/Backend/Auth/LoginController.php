@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -34,41 +35,45 @@ class LoginController extends Controller
      *
      * @return void
      */
-//    public function __construct()
-//    {
-//        $this->middleware('guest')->except('logout');
-//    }
+    //    public function __construct()
+    //    {
+    //        $this->middleware('guest')->except('logout');
+    //    }
 
-
-    function showLoginForm()
+    public function showLoginForm()
     {
         return view('backend.auth.login');
     }
 
-    function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
-            'email'=>'required|max:50',
-            'password' =>'required'
+            'email' => 'required|max:50',
+            'password' => 'required',
         ]);
 
-        if(Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request->password], $request->remember)){
-            session()->flash('success','Successfully Logged In');
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            session()->flash('success', 'Successfully Logged In');
+
             return redirect()->intended(route('admin.dashboard'));
-        }
-        else {
+        } else {
             // Search using username
             if (Auth::guard('admin')->attempt(['name' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successully Logged in !');
+
                 return redirect()->route('admin.dashboard');
             }
             // error
             session()->flash('error', 'Invalid email and password');
+
             return back();
         }
     }
-    function logout(Request $request)
+
+    public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
+
         return redirect()->route('admin.login');
     }
 }

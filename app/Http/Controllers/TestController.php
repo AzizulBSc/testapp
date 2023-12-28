@@ -1,13 +1,13 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Inertia\Inertia; 
+use Inertia\Inertia;
 
-class TestController extends Controller 
+class TestController extends Controller
 {
-    public function show() {
+    public function show()
+    {
         return Inertia::render('Test');
     }
 }
