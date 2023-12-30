@@ -17,11 +17,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
         $user = new User();
         $user->name = 'Azizul Hoque';
         $user->email = 'azizulh8774@gmail.com';
         $user->password = Hash::make('123456');
         $user->save();
-        // User::factory()->count(50)->create();
+        User::factory()->count(50)->create();
     }
 }

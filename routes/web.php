@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/chat','App\Http\Controllers\ChatController@index')->name('chat');
+Route::post('/message', 'App\Http\Controllers\ChatController@message')->name('message');
 Route::group(['/prefix' => 'admin'], function () {
     Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'App\Http\Controllers\Backend\RolesController', ['names' => 'roles']);
