@@ -39,6 +39,14 @@ Chat With User - Admin Panel
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body" id="message-area">
+                    @foreach ($history as $data )
+                    <div class="form-row">
+                        <div class="form-group col-md-4 col-sm-4">{{ $data->username }}
+                        </div>
+                        <div class="form-group col-md-8 col-sm-8">{{ $data->message }}
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="card-body">
                     <div class="form-row">
@@ -84,7 +92,6 @@ Chat With User - Admin Panel
       return false;
     }
    let data = {username:"{{ auth()->user()->name }}",message:messageInput.value};
-// console.log(data);return;
    $.ajax({
       url:"{{ route('message') }}",
       type:'POST',
@@ -99,22 +106,6 @@ error: function(error) {
 // Handle the error response here
 }
 });
-
-    // var messageArea = document.getElementById('message-area');
-    // var chatRow = document.createElement('div');
-    // var newUserCol = document.createElement('div');
-    // var newMessageCol = document.createElement('div');
-
-    // chatRow.className = 'form-row';
-    // newUserCol.className = 'form-group col-md-4 col-sm-4';
-    // newMessageCol.className = 'form-group col-md-8 col-sm-8';
-
-    // newMessageCol.innerText = messageInput.value;
-    // newUserCol.innerText = "{{ auth()->user()->name }}";
-
-    // chatRow.appendChild(newUserCol);
-    // chatRow.appendChild(newMessageCol);
-    // messageArea.appendChild(chatRow);
 Echo.channel('message').listen('MessageEvent',(e)=>{
 console.log(e);
 var messageArea = document.getElementById('message-area');
@@ -124,17 +115,14 @@ var newMessageCol = document.createElement('div');
 chatRow.className = 'form-row';
 newUserCol.className = 'form-group col-md-4 col-sm-4';
 newMessageCol.className = 'form-group col-md-8 col-sm-8';
-
 newMessageCol.innerText = e.message;
 newUserCol.innerText = e.username;
-
 chatRow.appendChild(newUserCol);
 chatRow.appendChild(newMessageCol);
 messageArea.appendChild(chatRow);
+console.log(2);
 })
-
-console.log("test");
-    messageInput.value = '';
+messageInput.value = '';
   }
 
 </script>

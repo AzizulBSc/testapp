@@ -11,7 +11,8 @@ class ChatController extends Controller
 
     public function index()
     {
-        return view('backend.pages.chat.index');
+        $history = Chat::get();
+        return view('backend.pages.chat.index',compact('history'));
     }
     public function message(Request $request)
     {

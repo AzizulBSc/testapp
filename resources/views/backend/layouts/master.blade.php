@@ -10,7 +10,6 @@
     @include('backend.layouts.partials.css')
     @yield('page-css')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script type="module" src="{{ asset('dist/main.js') }}" defer></script>
 </head>
 
 <body>
