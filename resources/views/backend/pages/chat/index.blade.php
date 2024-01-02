@@ -61,7 +61,7 @@ Chat With User - Admin Panel
 
 @section('page-js')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
+<script type="module">
     $(document).ready(function() {
             $('.select2').select2();
         })
@@ -132,7 +132,8 @@ chatRow.appendChild(newUserCol);
 chatRow.appendChild(newMessageCol);
 messageArea.appendChild(chatRow);
 })
-console.log("tst");
+
+console.log("test");
     messageInput.value = '';
   }
 
