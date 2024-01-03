@@ -40,12 +40,24 @@ Chat With User - Admin Panel
             <div class="card">
                 <div class="card-body" id="message-area">
                     @foreach ($history as $data )
-                    <div class="form-row">
-                        <div class="form-group col-md-4 col-sm-4">{{ $data->username }}
-                        </div>
+                    @if ($data->sender_id == auth()->user()->id)
+                    <div class="form-row justify-content-left">
                         <div class="form-group col-md-8 col-sm-8">{{ $data->message }}
                         </div>
+                        <div class="form-group col-md-4 col-sm-4">
+                            <p class="font-weight-bold">{{ $data->username }}</p>
+                        </div>
                     </div>
+                    @else
+                    <div class="form-row">
+                        <div class="form-group col-md-4 col-sm-4">
+                            <p class="font-weight-bold">{{ $data->username }}</p>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4">
+                           {{ $data->message }}
+                        </div>
+                    </div>
+                    @endif
                     @endforeach
                 </div>
                 <div class="card-body">
@@ -68,14 +80,13 @@ Chat With User - Admin Panel
 @endsection
 
 @section('page-js')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script type="module">
+<script>
     $(document).ready(function() {
             $('.select2').select2();
         })
   var message = document.getElementById('message');
   var sendbtn = document.getElementById('send');
-
+  var user_id = @json((string) auth()->user()->id);
     sendbtn.addEventListener('click', function() {
     sendMessage();
   });
@@ -106,22 +117,27 @@ error: function(error) {
 // Handle the error response here
 }
 });
+Echo.channel('message').stopListening('MessageEvent');
 Echo.channel('message').listen('MessageEvent',(e)=>{
-console.log(e);
-var messageArea = document.getElementById('message-area');
-var chatRow = document.createElement('div');
-var newUserCol = document.createElement('div');
-var newMessageCol = document.createElement('div');
-chatRow.className = 'form-row';
-newUserCol.className = 'form-group col-md-4 col-sm-4';
-newMessageCol.className = 'form-group col-md-8 col-sm-8';
-newMessageCol.innerText = e.message;
-newUserCol.innerText = e.username;
-chatRow.appendChild(newUserCol);
-chatRow.appendChild(newMessageCol);
-messageArea.appendChild(chatRow);
-console.log(2);
-})
+    var message = '';
+   if(e.sender_id == user_id) {
+   message = `<div class="form-row justify-content-left">
+        <div class="form-group col-md-8 col-sm-8">${e.message}
+        </div>
+        <div class="form-group col-md-4 col-sm-4"><p class="font-weight-bold">${e.username}</p>
+        </div>
+    </div>`;
+}
+else { 
+message = `<div class="form-row">
+    <div class="form-group col-md-4 col-sm-4"><p class="font-weight-bold">${e.username}</p>
+    </div>
+    <div class="form-group col-md-8 col-sm-8">${e.message}
+    </div>
+</div>`;
+}
+    $("#message-area").append(message);
+    })
 messageInput.value = '';
   }
 
