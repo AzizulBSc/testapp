@@ -1,0 +1,30 @@
+ <?php
+             $getAllShopPages = app()->content_repository->getAllShopPages();
+              $categories = get_categories('is_deleted=0&rel_id='.$getAllShopPages[0]['id']);
+              if ($categories) {
+                foreach ($categories as $category) {
+                 $categoryId = $category['id'];
+                 $categoryName = $category['title'];
+                 $parentId = $category['parent_id'];
+                 $url = $category['url'];
+                 echo '<div class="dropdown">';
+                 $subcategories = db_get("table=categories&parent_id=$categoryId");
+                 if (is_array($subcategories) && count($subcategories) > 0) {
+                  echo '<a href="'.$url.'" class="nav-item nav-link" data-toggle="dropdown">' . $categoryName . ' <i class="fa fa-angle-down float-right mt-1"></i></a>';
+                    echo '<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">';
+                    foreach ($subcategories as $subcategory) {
+                        $subcategoryId = $subcategory['id'];
+                        $subcategoryName = $subcategory['title'];
+                        $url1 = $subcategory['url'];
+                        echo '<a href="'.$url1.'" class="dropdown-item">' . $subcategoryName . '</a>';
+                    }
+                    echo '</div>';
+                }
+                else{
+                  if($parentId==0)
+                      echo '<a href="'.$url.'" class="nav-item nav-link" data-toggle="dropdown">' . $categoryName . '</a>';
+                }
+                echo '</div>';
+            }
+        }
+        ?>
