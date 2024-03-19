@@ -28,6 +28,10 @@
                                 class="ti-layout-sidebar-left"></i><span>Chat User
                             </span></a>
                     </li>
+<li>
+    <a href="{{ route('orders.index') }}" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Orders For bkash pyament
+        </span></a>
+</li>
                     <li>
                         <a href="{{ route('excel.import') }}" aria-expanded="true"><i
                                 class="ti-layout-sidebar-left"></i><span>Excel Import

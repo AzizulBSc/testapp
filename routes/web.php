@@ -84,7 +84,7 @@ Route::get('/pdf', 'App\Http\Controllers\PdfController@pdf');
 
 Route::get('/sms', [App\Http\Controllers\SmsController::class, 'sms']);
 Route::any('/sendsms', [App\Http\Controllers\SmsController::class, 'send_sms']);
-Route::get('/token', [App\Http\Controllers\PaymentController::class, 'token']);
+// Route::get('/token', [App\Http\Controllers\PaymentController::class, 'token']);
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'createPayment']);
 Route::post('payment/charge.', [App\Http\Controllers\PaymentController::class, 'charge'])->name('payment.charge');
 
@@ -104,3 +104,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/excel/import', [ExcelCSVController::class, 'index'])->name('excel.import');
 Route::post('import-excel-csv-file', [ExcelCSVController::class, 'importExcelCSV']);
 Route::get('export-excel-csv-file/{slug}', [ExcelCSVController::class, 'exportExcelCSV']);
+
+
+// bkash payment gateway routes
+
+Route::resource('orders', 'App\Http\Controllers\OrderController');
+// Route::get('orders', 'OrderController@index')->name('orders.index');
+Route::post('token', 'App\Http\Controllers\BkashPaymentController@token')->name('token');
+Route::get('createpayment', 'App\Http\Controllers\BkashPaymentController@createpayment')->name('createpayment');
+Route::get('executepayment', 'App\Http\Controllers\BkashPaymentController@executepayment')->name('executepayment');
