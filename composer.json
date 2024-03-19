@@ -10,6 +10,7 @@
         "cartalyst/stripe-laravel": "^14.0",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.4",
+        "karim007/laravel-bkash-tokenize": "^2.2",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",

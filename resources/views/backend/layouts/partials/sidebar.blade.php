@@ -27,7 +27,10 @@
                         <a href="{{ route('chat') }}"aria-expanded="true"><i
                                 class="ti-layout-sidebar-left"></i><span>Chat User
                             </span></a>
-                    </li>
+                    </li><li>
+    <a href="{{ url('bkash/payment') }}" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Bkash Payemnt by Karim Package
+        </span></a>
+</li>
 <li>
     <a href="{{ route('orders.index') }}" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Orders For bkash pyament
         </span></a>
